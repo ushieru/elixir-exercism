@@ -7,9 +7,8 @@ defmodule WordCount do
   @spec count(String.t()) :: map
   def count(sentence) do
     clean_sentence = sentence
+      |> String.replace("_", " ")
       |> String.split
-      |> Enum.map(fn w -> String.split(w, "_") end)
-      |> List.flatten
       |> Enum.map(&only_letters_screenplay_or_numbers/1)
       |> Enum.filter(fn r -> String.length(r) > 0 end)
       |> Enum.map(&String.downcase/1)
